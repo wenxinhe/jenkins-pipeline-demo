@@ -12,9 +12,9 @@ stage('Dev') {
 
 stage('QA') {
     parallel(longerTests: {
-        runTests(30)
+        runTests(servers, 30)
     }, quickerTests: {
-        runTests(20)
+        runTests(servers, 20)
     })
     echo "Test results: ${testResult(currentBuild)}"
 }
@@ -50,7 +50,7 @@ def mvn(args) {
     sh "${tool 'Maven 3.x'}/bin/mvn ${args}"
 }
 
-def runTests(duration) {
+def runTests(servers, duration) {
     node {
         checkout scm
         servers.withDeployment {id ->
