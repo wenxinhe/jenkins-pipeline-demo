@@ -39,8 +39,8 @@ milestone 3
 stage ('Production') {
     lock(resource: 'production-server', inversePrecedence: true) {
         node {
-            sh "wget -O - -S ${jettyUrl}staging/"
-            echo 'Production server looks to be alive'
+            // sh "wget -O - -S ${jettyUrl}staging/"
+            // echo 'Production server looks to be alive'
             servers.deploy 'production'
             echo "Deployed to ${jettyUrl}production/"
         }
